@@ -1,0 +1,273 @@
+import { LitElement, html } from 'lit';
+import { customElement, property, query, state } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { emit } from '../../internal/event';
+import { live } from 'lit/directives/live.js';
+import { watch } from '../../internal/watch';
+import { getLabelledBy, renderFormControl } from '../../internal/form-control';
+import { FormSubmitController } from '../../internal/form-control';
+import { HasSlotController } from '../../internal/slot';
+import styles from './range.styles';
+
+let id = 0;
+
+/**
+ * @since 2.0
+ * @status stable
+ *
+ * @slot label - The input's label. Alternatively, you can use the label prop.
+ * @slot help-text - Help text that describes how to use the input. Alternatively, you can use the help-text prop.
+ *
+ * @event sl-change - Emitted when the control's value changes.
+ * @event sl-blur - Emitted when the control loses focus.
+ * @event sl-focus - Emitted when the control gains focus.
+ *
+ * @csspart base - The component's base wrapper.
+ * @csspart input - The native range input.
+ * @csspart tooltip - The range tooltip.
+ *
+ * @cssproperty --thumb-size - The size of the thumb.
+ * @cssproperty --tooltip-offset - The vertical distance the tooltip is offset from the track.
+ * @cssproperty --track-color-active - The color of the portion of the track that represents the current value.
+ * @cssproperty --track-color-inactive - The of the portion of the track that represents the remaining value.
+ * @cssproperty --track-height - The height of the track.
+ */
+@customElement('sl-range')
+export default class SlRange extends LitElement {
+  static styles = styles;
+
+  @query('.range__control') input: HTMLInputElement;
+  @query('.range__tooltip') output: HTMLOutputElement;
+
+  // @ts-ignore
+  private formSubmitController = new FormSubmitController(this);
+  private hasSlotController = new HasSlotController(this, 'help-text', 'label');
+  private inputId = `input-${++id}`;
+  private helpTextId = `input-help-text-${id}`;
+  private labelId = `input-label-${id}`;
+  private resizeObserver: ResizeObserver;
+
+  @state() private hasFocus = false;
+  @state() private hasTooltip = false;
+
+  /** The input's name attribute. */
+  @property() name = '';
+
+  /** The input's value attribute. */
+  @property({ type: Number }) value = 0;
+
+  /** The range's label. Alternatively, you can use the label slot. */
+  @property() label = '';
+
+  /** The range's help text. Alternatively, you can use the help-text slot. */
+  @property({ attribute: 'help-text' }) helpText = '';
+
+  /** Disables the input. */
+  @property({ type: Boolean, reflect: true }) disabled = false;
+
+  /**
+   * This will be true when the control is in an invalid state. Validity in range inputs is determined by the message
+   * provided by the `setCustomValidity` method.
+   */
+  @property({ type: Boolean, reflect: true }) invalid = false;
+
+  /** The input's min attribute. */
+  @property({ type: Number }) min = 0;
+
+  /** The input's max attribute. */
+  @property({ type: Number }) max = 100;
+
+  /** The input's step attribute. */
+  @property({ type: Number }) step = 1;
+
+  /** The preferred placement of the tooltip. */
+  @property() tooltip: 'top' | 'bottom' | 'none' = 'top';
+
+  /** A function used to format the tooltip's value. */
+  @property({ attribute: false }) tooltipFormatter: (value: number) => string = (value: number) => value.toString();
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.resizeObserver = new ResizeObserver(() => this.syncRange());
+
+    if (this.value === undefined || this.value === null) this.value = this.min;
+    if (this.value < this.min) this.value = this.min;
+    if (this.value > this.max) this.value = this.max;
+
+    this.updateComplete.then(() => {
+      this.syncRange();
+      this.resizeObserver.observe(this.input);
+    });
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.resizeObserver.unobserve(this.input);
+  }
+
+  /** Sets focus on the input. */
+  focus(options?: FocusOptions) {
+    this.input.focus(options);
+  }
+
+  /** Removes focus from the input. */
+  blur() {
+    this.input.blur();
+  }
+
+  /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
+  setCustomValidity(message: string) {
+    this.input.setCustomValidity(message);
+    this.invalid = !this.input.checkValidity();
+  }
+
+  handleInput() {
+    this.value = Number(this.input.value);
+    emit(this, 'sl-change');
+
+    this.syncRange();
+  }
+
+  handleBlur() {
+    this.hasFocus = false;
+    this.hasTooltip = false;
+    emit(this, 'sl-blur');
+  }
+
+  @watch('value', { waitUntilFirstUpdate: true })
+  handleValueChange() {
+    this.value = Number(this.value);
+
+    if (this.input) {
+      this.invalid = !this.input.checkValidity();
+    }
+
+    this.syncRange();
+  }
+
+  @watch('disabled')
+  handleDisabledChange() {
+    // Disabled form controls are always valid, so we need to recheck validity when the state changes
+    if (this.input) {
+      this.input.disabled = this.disabled;
+      this.invalid = !this.input.checkValidity();
+    }
+  }
+
+  handleFocus() {
+    this.hasFocus = true;
+    this.hasTooltip = true;
+    emit(this, 'sl-focus');
+  }
+
+  handleThumbDragStart() {
+    this.hasTooltip = true;
+  }
+
+  handleThumbDragEnd() {
+    this.hasTooltip = false;
+  }
+
+  syncRange() {
+    const percent = Math.max(0, (this.value - this.min) / (this.max - this.min));
+
+    this.syncProgress(percent);
+
+    if (this.tooltip !== 'none') {
+      this.syncTooltip(percent);
+    }
+  }
+
+  syncProgress(percent: number) {
+    this.input.style.background = `linear-gradient(to right, var(--track-color-active) 0%, var(--track-color-active) ${
+      percent * 100
+    }%, var(--track-color-inactive) ${percent * 100}%, var(--track-color-inactive) 100%)`;
+  }
+
+  syncTooltip(percent: number) {
+    if (this.output) {
+      const inputWidth = this.input.offsetWidth;
+      const tooltipWidth = this.output.offsetWidth;
+      const thumbSize = getComputedStyle(this.input).getPropertyValue('--thumb-size');
+      const x = `calc(${inputWidth * percent}px - calc(calc(${percent} * ${thumbSize}) - calc(${thumbSize} / 2)))`;
+
+      this.output.style.transform = `translateX(${x})`;
+      this.output.style.marginLeft = `-${tooltipWidth / 2}px`;
+    }
+  }
+
+  render() {
+    const hasLabelSlot = this.hasSlotController.test('label');
+    const hasHelpTextSlot = this.hasSlotController.test('help-text');
+
+    // NOTE - always bind value after min/max, otherwise it will be clamped
+    return renderFormControl(
+      {
+        inputId: this.inputId,
+        label: this.label,
+        labelId: this.labelId,
+        hasLabelSlot,
+        helpTextId: this.helpTextId,
+        helpText: this.helpText,
+        hasHelpTextSlot,
+        size: 'medium'
+      },
+      html`
+        <div
+          part="base"
+          class=${classMap({
+            range: true,
+            'range--disabled': this.disabled,
+            'range--focused': this.hasFocus,
+            'range--tooltip-visible': this.hasTooltip,
+            'range--tooltip-top': this.tooltip === 'top',
+            'range--tooltip-bottom': this.tooltip === 'bottom'
+          })}
+          @mousedown=${this.handleThumbDragStart}
+          @mouseup=${this.handleThumbDragEnd}
+          @touchstart=${this.handleThumbDragStart}
+          @touchend=${this.handleThumbDragEnd}
+        >
+          <input
+            part="input"
+            type="range"
+            class="range__control"
+            name=${ifDefined(this.name)}
+            ?disabled=${this.disabled}
+            min=${ifDefined(this.min)}
+            max=${ifDefined(this.max)}
+            step=${ifDefined(this.step)}
+            .value=${live(String(this.value))}
+            aria-labelledby=${ifDefined(
+              getLabelledBy({
+                label: this.label,
+                labelId: this.labelId,
+                hasLabelSlot,
+                helpText: this.helpText,
+                helpTextId: this.helpTextId,
+                hasHelpTextSlot
+              })
+            )}
+            @input=${this.handleInput}
+            @focus=${this.handleFocus}
+            @blur=${this.handleBlur}
+          />
+          ${this.tooltip !== 'none' && !this.disabled
+            ? html`
+                <output part="tooltip" class="range__tooltip">
+                  ${typeof this.tooltipFormatter === 'function' ? this.tooltipFormatter(this.value) : this.value}
+                </output>
+              `
+            : ''}
+        </div>
+      `
+    );
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'sl-range': SlRange;
+  }
+}

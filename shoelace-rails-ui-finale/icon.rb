@@ -1,0 +1,5 @@
+module ShoelaceRailsUI
+  def icon(name:, src:, label:, &block)
+    <icon ["name=\#{name}", "src=\#{src}", "label=\#{label}"]
+  end
+end
