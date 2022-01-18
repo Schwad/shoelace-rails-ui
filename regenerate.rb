@@ -23,9 +23,9 @@ Dir.each_child(SL_DIR) do |child|
   new_properties = properties.flatten.compact.uniq.map { |prop| "#{prop.gsub("-", "_")}:" }
   wrapper_method = <<~METHOD
     module ShoelaceRailsUI
-      def #{new_child}(#{[new_properties.join(', '), "&block"].compact.join(", ")})
+      def #{new_child}(#{[new_properties.join(', '), "&block"].flatten.compact.reject(&:empty?).join(", ")})
         \"
-        <#{child} #{properties.flatten.compact.uniq.map { |prop| "#{prop}=\#\{#{prop.gsub("-","_")}\}" }.join(", ")}>
+        <#{child}#{properties.flatten.compact.uniq.map { |prop| " #{prop}=\#\{#{prop.gsub("-","_")}\}" }.join(",")}>
           \#\{block.call\}
         </#{child}>
         \"
@@ -34,7 +34,7 @@ Dir.each_child(SL_DIR) do |child|
   METHOD
 
   File.open("#{SL_RAILS_UI_DIR}/#{new_child}.rb", 'w') { |f| f.write(wrapper_method) }
-  File.open('shoelace-rails-ui.rb', 'a') { |f| f.puts "require_relative \"#{SL_RAILS_UI_DIR}/#{new_child}\""}
+  File.open("shoelace-rails-ui-#{ARGV[0]}.rb", 'a') { |f| f.puts "require_relative \"#{SL_RAILS_UI_DIR}/#{new_child}\""}
 rescue => e
   require 'pry'; binding.pry
 end

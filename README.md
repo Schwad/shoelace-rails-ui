@@ -13,3 +13,12 @@
 - [ ] Generate and publish an ERB-style shoelace docs page
   * e.g. `<%= sl_drawer %>` and optional args
   * possibly do vanilla Markdown to start. This is my library it doesn't need to look identical.
+
+
+  Components
+
+  * derek prior including css in a gem
+  * same with js
+  * include manually in a real rails app as a helper and then showing it generates valid shoelace
+  * rails engine gemifying it and show it still works etc.
+  * automatic document gen
