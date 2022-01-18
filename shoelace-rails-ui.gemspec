@@ -8,13 +8,13 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Nick Schwaderer"]
   spec.email         = ["nick.schwaderer@shopify.com"]
 
-  spec.summary       = "TODO: Write a short summary, because RubyGems requires one."
-  spec.description   = "TODO: Write a longer description or delete this line."
+  spec.summary       = "Shoelace, ready to roll and railsified."
+  spec.description   = "Use shoelace out of the box, with ERB and adapters for rails helpers"
   spec.homepage      = "https://schwad.github.io"
   spec.license       = "MIT"
   spec.required_ruby_version = ">= 2.4.0"
 
-  spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
+  spec.metadata["allowed_push_host"] = "https://rubygems.org"
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/schwad/shoelace-rails-ui"
