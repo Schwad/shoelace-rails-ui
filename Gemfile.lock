@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    shoelace-rails-ui (0.1.0)
+    shoelace-rails-ui (2.0.0.beta6)
 
 GEM
   remote: https://rubygems.org/
@@ -30,6 +30,7 @@ GEM
     unicode-display_width (2.1.0)
 
 PLATFORMS
+  universal-darwin-21
   x86_64-darwin-19
 
 DEPENDENCIES
