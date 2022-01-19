@@ -1,6 +1,13 @@
 # Shoelace::Rails::Ui
 Get started with [Shoelace]() today, the Rails way!
 
+## What this gives you
+
+* Out of the box shoelace
+* `sl_my_component`-style ERB syntax for composing HTML with these components
+* `sl_form_for` helpers to write forms the Rails way, supercharged with Shoelace (credit to [shoelace-rails](https://github.com/yuki24/shoelace-rails))
+* [Full documentation on these components, ERB-style](#)
+
 ## Quickstart
 
 1. Add to gemfile and `bundle install`
@@ -13,6 +20,8 @@ Get started with [Shoelace]() today, the Rails way!
 *️⃣: To be automated into an install command or included explicitly in engine
 ## Requirements
 * Rails 7.0 or greater with defaults (hotwire, importmaps, etc.)
+
+
 
 ## Not required
 
@@ -27,6 +36,7 @@ Get started with [Shoelace]() today, the Rails way!
 
 * Double render on helper?
 * Ideas for automating 3-5 in quickstart. Install or in gem?
+* Any other considerations when packaging up assets?
 
 
 ##################
