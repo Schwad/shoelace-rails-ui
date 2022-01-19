@@ -21,14 +21,23 @@ Dir.each_child(SL_DIR) do |child|
 
   new_child = child.gsub('-', '_')
   new_properties = properties.flatten.compact.uniq.map { |prop| "#{prop.gsub("-", "_")}:" }
+  # wrapper_method = <<~METHOD
+  #   module ShoelaceRailsUI
+  #     def sl_#{new_child}(#{[new_properties.join(', '), "&block"].flatten.compact.reject(&:empty?).join(", ")})
+  #       \"
+  #       <#{child}#{properties.flatten.compact.uniq.map { |prop| " #{prop}=\#\{#{prop.gsub("-","_")}\}" }.join(",")}>
+  #         \#\{block.call\}
+  #       </#{child}>
+  #       \"
+  #     end
+  #   end
+  # METHOD
+
+  # Rewrite
   wrapper_method = <<~METHOD
     module ShoelaceRailsUI
-      def #{new_child}(#{[new_properties.join(', '), "&block"].flatten.compact.reject(&:empty?).join(", ")})
-        \"
-        <#{child}#{properties.flatten.compact.uniq.map { |prop| " #{prop}=\#\{#{prop.gsub("-","_")}\}" }.join(",")}>
-          \#\{block.call\}
-        </#{child}>
-        \"
+      def sl_#{new_child}(#{new_properties.join(', ')})
+        content_tag(\"sl-#{child}#{properties.flatten.compact.uniq.map { |prop| " #{prop}=\#\{#{prop.gsub("-","_")}\}" }.join(",")}\", yield)
       end
     end
   METHOD
