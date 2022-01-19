@@ -14,6 +14,10 @@
   * e.g. `<%= sl_drawer %>` and optional args
   * possibly do vanilla Markdown to start. This is my library it doesn't need to look identical.
 
+- [ ] "install" command
+  - [ ] include css require
+  - [ ] include js import
+
 
   Components
 
