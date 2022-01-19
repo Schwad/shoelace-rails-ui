@@ -4,6 +4,20 @@
 
 # TEST: do some vanilla ERB generation and see what you get.
 
+# Support
+def formatted_properties(properties)
+  properties.flatten.compact.uniq.map do |prop|
+    " #{prop}=\#\{#{prop.gsub("-","_")}\}".join(",")
+  end
+end
+
+def formatted_boolean_properties(bools)
+  bools.map do |bool|
+    next if bool == "false"
+    " #{bool[0]}"
+  end
+end
+
 # Initialize our new directory
 require 'fileutils'
 
@@ -17,27 +31,17 @@ SL_DIR = 'remote-src/2.0.0.beta64/shoelace-next/src/components'
 Dir.each_child(SL_DIR) do |child|
   file_text = File.open("#{SL_DIR}/#{child}/#{child}.ts").readlines.join('')
   component = /customElement\('(sl-.*?'\))/.match(file_text)[1]
-  properties = file_text.scan(/property\({ attribute: '(.*)?' }\)|property\(\) (.*)?:/)
+  main_properties = file_text.scan(/property\({ attribute: '(.*)?' }\)|property\(\) (.*)?:/)
+  booleans = file_text.scan(/property\({ type: Boolean.*?}\) (.*) = (\w+)/)
 
   new_child = child.gsub('-', '_')
-  new_properties = properties.flatten.compact.uniq.map { |prop| "#{prop.gsub("-", "_")}:" }
-  # wrapper_method = <<~METHOD
-  #   module ShoelaceRailsUI
-  #     def sl_#{new_child}(#{[new_properties.join(', '), "&block"].flatten.compact.reject(&:empty?).join(", ")})
-  #       \"
-  #       <#{child}#{properties.flatten.compact.uniq.map { |prop| " #{prop}=\#\{#{prop.gsub("-","_")}\}" }.join(",")}>
-  #         \#\{block.call\}
-  #       </#{child}>
-  #       \"
-  #     end
-  #   end
-  # METHOD
+  new_properties = main_properties.flatten.compact.uniq.map { |prop| "#{prop.gsub("-", "_")}:" }
 
   # Rewrite
   wrapper_method = <<~METHOD
     module ShoelaceRailsUI
-      def sl_#{new_child}(#{new_properties.join(', ')})
-        content_tag(\"sl-#{child}#{properties.flatten.compact.uniq.map { |prop| " #{prop}=\#\{#{prop.gsub("-","_")}\}" }.join(",")}\", yield)
+      def sl_#{new_child}(#{new_properties.join(', ')}#{booleans ? ', ' : ''}#{booleans.map{|bool| "#{bool[0]}: #{bool[1]}"}.join(", ")})
+        content_tag(\"sl-#{child}#{formatted_properties(main_properties)}#{formatted_boolean_properties(booleans)}\", yield)
       end
     end
   METHOD
