@@ -5,7 +5,8 @@ Get started with [Shoelace]() today, the Rails way!
 
 * Out of the box shoelace
 * `sl_my_component`-style ERB syntax for composing HTML with these components
-* `sl_form_for` helpers to write forms the Rails way, supercharged with Shoelace (credit to [shoelace-rails](https://github.com/yuki24/shoelace-rails))
+* `sl_form` helpers to write forms the Rails way, supercharged with Shoelace      
+  * authored originally by @yuki24 in [shoelace-rails](https://github.com/yuki24/shoelace-rails)
 * [Full documentation on these components, ERB-style](#)
 
 ## Quickstart
@@ -15,6 +16,7 @@ Get started with [Shoelace]() today, the Rails way!
 `*️⃣
 1. in `application.js` add: `import "shoelace"`*️⃣
 1. in `application.css` add: `*= require sl_styles_light.css`*️⃣
+1. Start building your app!
 
 
 *️⃣: To be automated into an install command or included explicitly in engine
