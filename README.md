@@ -13,11 +13,23 @@ Get started with [Shoelace]() today, the Rails way!
 *️⃣: To be automated into an install command or included explicitly in engine
 ## Requirements
 * Rails 7.0 or greater with defaults (hotwire, importmaps, etc.)
+
 ## Not required
 
+* custom javascript
+* custom css
 * yarn
 * webpack
 * node
+
+
+### Kevin Q's/Issues
+
+* Double render on helper?
+* Ideas for automating 3-5 in quickstart. Install or in gem?
+
+
+##################
 
 ## Usage
 How to use my plugin.

@@ -3,7 +3,7 @@ NEXT STEPS:::
 --> get generation to do valid shoelace
 --> how-to guide (e.g. bundle install, manual importmaps for now, manual require for now, that's okay);
 --> example of with and without shoelace
-
+--> include icons?
 
 after all good 
 
