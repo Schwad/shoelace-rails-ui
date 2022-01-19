@@ -1,3 +1,20 @@
+NEXT STEPS:::
+
+--> get generation to do valid shoelace
+--> how-to guide (e.g. bundle install, manual importmaps for now, manual require for now, that's okay);
+--> example of with and without shoelace
+
+
+after all good 
+
+<-- hook into existing rails form and link_to, maybe with sl_form to start >
+
+way later
+
+<-- autogen docs -->
+
+
+
 # TODO
 
 - [ ] Automate pulling down and version sync from shoelace-style/shoelace

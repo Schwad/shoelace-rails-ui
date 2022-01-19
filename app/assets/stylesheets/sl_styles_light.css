@@ -14,7 +14,7 @@
  *= require_self
  */
 
- :root,
+:root,
 :host,
 .sl-theme-light {
   --sl-color-gray-50: hsl(0 0% 97.5%);

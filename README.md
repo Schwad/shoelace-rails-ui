@@ -1,5 +1,23 @@
 # Shoelace::Rails::Ui
-Short description and motivation.
+Get started with [Shoelace]() today, the Rails way!
+
+## Quickstart
+
+1. Add to gemfile and `bundle install`
+1. in `config/importmap.rb` add `pin "shoelace", to: "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.64/dist/shoelace.js"
+`*️⃣
+1. in `application.js` add: `import "shoelace"`*️⃣
+1. in `application.css` add: `*= require sl_styles_light.css`*️⃣
+
+
+*️⃣: To be automated into an install command or included explicitly in engine
+## Requirements
+* Rails 7.0 or greater with defaults (hotwire, importmaps, etc.)
+## Not required
+
+* yarn
+* webpack
+* node
 
 ## Usage
 How to use my plugin.
