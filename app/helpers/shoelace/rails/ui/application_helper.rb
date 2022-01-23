@@ -36,8 +36,12 @@ module Shoelace
         # end
 
         # gen1 example
-        def sl_alert(open: false, closable: false, variant: 'primary', &block)
+        def sl_alert(open: false, closable: false, variant: 'primary')
           content_tag "sl-alert#{open ? " open" : ""}#{closable ? " closable" : ""} variant=#{variant}", yield
+        end
+
+        def sl_details(summary: "Toggle this")
+          content_tag "sl-details summary=#{summary}}", yield
         end
       end
     end

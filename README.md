@@ -43,6 +43,24 @@ Get started with [Shoelace]() today, the Rails way!
 * Any other considerations when packaging up assets?
 
 
+## Workload for MVP
+
+| Todo  | Status |
+| ------------- | ------------- |
+| `rails generate shoelace:install` one-step to shoelace | ✅ |
+| Render nested shoelace components  | ✅ |
+| Include assets | ✅ |
+| V1 codegen | 🔲 |
+| V2 codegen (with @kddnewton's guidance implemented) | 🔲 |
+| Basic gen test coverage | 🔲 |
+| All components test covered | 🔲 |
+| Github Action CI | 🔲 |
+| Render icons  | 🔲  |
+
+* Nesting render 
+* Solve Icon generation and render (it's currently in the assets/icons)
+
+
 ##################
 
 ## Usage
