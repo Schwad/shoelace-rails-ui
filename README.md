@@ -18,6 +18,8 @@ Get started with [Shoelace]() today, the Rails way!
 1. in `application.css` add: `*= require sl_styles_light.css`*️⃣
 1. Start building your app!
 
+###NOTES: lookup railsdocs on generator
+
 
 *️⃣: To be automated into an install command or included explicitly in engine
 ## Requirements

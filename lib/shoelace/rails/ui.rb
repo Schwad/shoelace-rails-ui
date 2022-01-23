@@ -1,5 +1,6 @@
 require "shoelace/rails/ui/version"
 require "shoelace/rails/ui/engine"
+require "../shoelace/lib/generators/shoelace/install_generator.rb"
 
 module Shoelace
   module Rails
