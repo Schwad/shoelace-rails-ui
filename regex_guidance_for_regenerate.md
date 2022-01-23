@@ -1,0 +1,3 @@
+- all .d.ts files
+- line does NOT start with static
+- within `export default .* {? (^((?!private).)*$\w+: (.*)) declare global {`

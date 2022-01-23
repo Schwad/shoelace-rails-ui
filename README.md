@@ -56,6 +56,7 @@ Get started with [Shoelace]() today, the Rails way!
 | All components test covered | 🔲 |
 | Github Action CI | 🔲 |
 | Render icons  | 🔲  |
+| Autogen docs site  | 🔲  |
 
 * Nesting render 
 * Solve Icon generation and render (it's currently in the assets/icons)

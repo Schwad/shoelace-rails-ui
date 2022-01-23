@@ -5,17 +5,24 @@
 # TEST: do some vanilla ERB generation and see what you get.
 
 # Support
-def formatted_properties(properties)
-  properties.flatten.compact.uniq.map do |prop|
-    " #{prop}=\#\{#{prop.gsub("-","_")}\}".join(",")
+def formatted_vals(vals)
+  ary = []
+  vals.map(&:first).each do |prop|
+    # E.g.
+    #{args[:variant] ? "variant=#{args[:variant]}" : ""} 
+    prop = prop[0..-2]
+    ary << " \#\{args[:#{prop}] ? \"#{prop.gsub("_", "-")}=\#\{args[:#{prop}]\}\" : \"\"}"
   end
+  ary.join("")
 end
 
-def formatted_boolean_properties(bools)
-  bools.map do |bool|
-    next if bool == "false"
-    " #{bool[0]}"
+def formatted_bools(bools)
+  ary = []
+  bools.map(&:first).each do |bool|
+    bool = bool[0..-2]
+    ary << " \#\{args[:#{bool}] ? \" #{bool.gsub("_", "-")}\" : \"\"\}"
   end
+  ary.join("")
 end
 
 # Initialize our new directory
@@ -26,30 +33,27 @@ SL_RAILS_UI_DIR = FileUtils.mkdir_p("shoelace-rails-ui-#{VERSION}")[0]
 
 # Iterate through sourcecode and codegen our wrappers
 
-SL_DIR = 'remote-src/2.0.0.beta64/shoelace-next/src/components'
+SL_DIR = 'remote-src/2.0.0.beta64/shoelace-next/dist/components'
 
 Dir.each_child(SL_DIR) do |child|
-  file_text = File.open("#{SL_DIR}/#{child}/#{child}.ts").readlines.join('')
-  component = /customElement\('(sl-.*?'\))/.match(file_text)[1]
-  main_properties = file_text.scan(/property\({ attribute: '(.*)?' }\)|property\(\) (.*)?:/)
-  booleans = file_text.scan(/property\({ type: Boolean.*?}\) (.*) = (\w+)/)
-
-  new_child = child.gsub('-', '_')
-  new_properties = main_properties.flatten.compact.uniq.map { |prop| "#{prop.gsub("-", "_")}:" }
-
+  file_text = File.open("#{SL_DIR}/#{child}/#{child}.d.ts").readlines.join('')
+  elements = file_text.scan(/\s+(\w+): (.*);/)
+  elements.reject!{|el| ["styles", "base"].include?(el[0]) }
+  elements = elements.map{ |el| ["#{el[0].gsub("-", "_")}:", el[1]] }
+  bools, vals = elements.partition{|el| el[1] == "boolean"}
   # Rewrite
   wrapper_method = <<~METHOD
     module ShoelaceRailsUI
-      def sl_#{new_child}(#{new_properties.join(', ')}#{booleans ? ', ' : ''}#{booleans.map{|bool| "#{bool[0]}: #{bool[1]}"}.join(", ")})
-        content_tag(\"sl-#{child}#{formatted_properties(main_properties)}#{formatted_boolean_properties(booleans)}\", yield)
+      def sl_#{child.gsub("-", "_")}(**args)
+        content_tag(\"sl-#{child}#{formatted_vals(vals)}#{formatted_bools(bools)}\", yield)
       end
     end
   METHOD
 
-  File.open("#{SL_RAILS_UI_DIR}/#{new_child}.rb", 'w') { |f| f.write(wrapper_method) }
-  File.open("shoelace-rails-ui-#{ARGV[0]}.rb", 'a') { |f| f.puts "require_relative \"#{SL_RAILS_UI_DIR}/#{new_child}\""}
+
+  File.open("#{SL_RAILS_UI_DIR}/#{child.gsub("-", "_")}.rb", 'w') { |f| f.write(wrapper_method) }
+  File.open("shoelace-rails-ui-#{ARGV[0]}.rb", 'a') { |f| f.puts "require_relative \"#{SL_RAILS_UI_DIR}/#{child.gsub("-", "_")}\""}
 rescue => e
-  require 'pry'; binding.pry
 end
 
 # def sl_drawer(prop_one:, prop_two:, &block)

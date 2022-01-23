@@ -1,7 +1,11 @@
+require "../shoelace/lib/codegen"
+
 module Shoelace
   module Rails
     module Ui
       module ApplicationHelper
+        include ShoelaceRailsUI
+        # This is the fancy version I'm looking for on gen2
         # class SlBase
         #   attr_reader :view_context
 
@@ -11,7 +15,6 @@ module Shoelace
         # end
 
         
-        # This is the fancy version I'm looking for on gen2
         # class SlAlert < SlBase
         #   attr_reader :open, :closable, :variant
 
@@ -36,13 +39,9 @@ module Shoelace
         # end
 
         # gen1 example
-        def sl_alert(open: false, closable: false, variant: 'primary')
-          content_tag "sl-alert#{open ? " open" : ""}#{closable ? " closable" : ""} variant=#{variant}", yield
-        end
-
-        def sl_details(summary: "Toggle this")
-          content_tag "sl-details summary=#{summary}}", yield
-        end
+        # def sl_alert(**args)
+        #   content_tag("sl-alert #{args[:variant] ? "variant=#{args[:variant]}" : ""} #{args[:duration] ? "duration=#{args[:duration]}" : ""} #{args[:open] ? " open" : ""} #{args[:closable] ? " closable" : ""}", yield)
+        # end
       end
     end
   end
