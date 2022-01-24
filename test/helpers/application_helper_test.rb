@@ -1,10 +1,6 @@
-require "test_helper"
+require 'test_helper'
 
-class Shoelace::Rails::UiTest < ActiveSupport::TestCase
-  test "it has a version number" do
-    assert Shoelace::Rails::Ui::VERSION
-  end
-
+class ApplicationHelperTest < ActionView::TestCase
   test 'generator spits out expected text' do
     result = ApplicationController.helpers.sl_alert(open: true, variant: "warning") do
       'hai'
