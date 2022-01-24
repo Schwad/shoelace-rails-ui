@@ -1,4 +1,5 @@
-require "../shoelace/lib/codegen"
+# Let's figure out a cleaner require here with load path
+require "codegen"
 
 module Shoelace
   module Rails

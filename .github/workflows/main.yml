@@ -1,0 +1,20 @@
+name: Main
+on:
+- push
+- pull_request_target
+jobs:
+  ci:
+    name: CI
+    runs-on: ubuntu-latest
+    env:
+      CI: true
+    steps:
+    - uses: actions/checkout@master
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.1'
+        bundler-cache: true
+    - name: Lint and test
+      run: |
+        # bundle exec rubocop --parallel
+        bundle exec rails test
