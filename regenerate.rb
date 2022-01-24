@@ -44,8 +44,8 @@ Dir.each_child(SL_DIR) do |child|
   # Rewrite
   wrapper_method = <<~METHOD
     module ShoelaceRailsUI
-      def sl_#{child.gsub("-", "_")}(**args)
-        content_tag(\"sl-#{child}#{formatted_vals(vals)}#{formatted_bools(bools)}\", yield)
+      def sl_#{child.gsub("-", "_")}(**args, &block)
+        content_tag(\"sl-#{child}#{formatted_vals(vals)}#{formatted_bools(bools)}\", &block)
       end
     end
   METHOD

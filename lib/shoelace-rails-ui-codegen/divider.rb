@@ -1,5 +1,5 @@
 module ShoelaceRailsUI
-  def sl_divider(**args)
-    content_tag("sl-divider #{args[:vertical] ? " vertical" : ""}", yield)
+  def sl_divider(**args, &block)
+    content_tag("sl-divider #{args[:vertical] ? " vertical" : ""}", &block)
   end
 end
