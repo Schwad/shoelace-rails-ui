@@ -54,7 +54,7 @@ Get started with [Shoelace]() today, the Rails way!
 | V2 codegen (with @kddnewton's guidance implemented) | 🔲 |
 | Basic gen test coverage | 🔲 |
 | All components test covered | 🔲 |
-| Github Action CI | 🔲 |
+| Github Action CI | ✅ |
 | Render icons  | 🔲  |
 | Autogen docs site  | 🔲  |
 | *BUG* - double text render | ✅ |
