@@ -1,4 +1,4 @@
-require "../shoelace/lib/codegen"
+require "./lib/codegen"
 
 module Shoelace
   module Rails
