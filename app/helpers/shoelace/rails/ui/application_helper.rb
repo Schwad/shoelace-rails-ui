@@ -1,5 +1,5 @@
 # Let's figure out a cleaner require here with load path
-require_relative "../../../../../lib/codegen"
+require "codegen"
 
 module Shoelace
   module Rails
