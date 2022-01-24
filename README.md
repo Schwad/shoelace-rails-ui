@@ -30,6 +30,9 @@ Get started with [Shoelace](https://shoelace.style/) today, the Rails way!
 [All components](#)
 [Example rails application](https://github.com/Schwad/shoelace_rails_ui_test_application)
 
+UPNEXT: gem load right in ci; get push; test against another rails app from gem push;
+practice demo; tidy up the readme
+
 ## Workload for MVP _(contribute today!)_
 
 | Todo  | Status |
