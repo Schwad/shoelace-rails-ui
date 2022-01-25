@@ -17,7 +17,7 @@ Get started with [Shoelace](https://shoelace.style/) today, the Rails way!
 ## Requirements
 * Rails 7.0 or greater with defaults (hotwire, importmaps, etc.)
 
-## Not required
+## What you don't need
 
 * custom javascript
 * custom css
@@ -30,9 +30,6 @@ Get started with [Shoelace](https://shoelace.style/) today, the Rails way!
 [All components](#)
 [Example rails application](https://github.com/Schwad/shoelace_rails_ui_test_application)
 
-UPNEXT: gem load right in ci; get push; test against another rails app from gem push;
-practice demo; tidy up the readme
-
 ## Workload for MVP _(contribute today!)_
 
 | Todo  | Status |
@@ -42,9 +39,10 @@ practice demo; tidy up the readme
 | Include assets | ✅ |
 | V1 codegen | ✅ |
 | V2 codegen (with @kddnewton's guidance implemented) | 🔲 |
-| Basic gen test coverage | 🔲 |
+| Smoketest in CI | ✅ |
 | All components test covered | 🔲 |
 | Github Action CI | ✅ |
+| Linting in CI | 🔲 |
 | Render icons  | 🔲  |
 | Autogen docs site  | 🔲  |
 | Version parity with shoelace  | 🔲  |
