@@ -28,7 +28,7 @@ Get started with [Shoelace](https://shoelace.style/) today, the Rails way!
 ## Docs
 
 [All components](#)
-[Example rails application](https://github.com/Schwad/shoelace_rails_ui_test_application)
+[Example application that actually uses this](https://github.com/Schwad/shoelace-rails-ui-example)
 
 ## Workload for MVP _(contribute today!)_
 
@@ -46,6 +46,7 @@ Get started with [Shoelace](https://shoelace.style/) today, the Rails way!
 | Render icons  | 🔲  |
 | Autogen docs site  | 🔲  |
 | Version parity with shoelace  | 🔲  |
+| *BUG* Details summary only accepts one word  | 🔲  |
 | *BUG* - double text render | ✅ |
 
 ## Notes
