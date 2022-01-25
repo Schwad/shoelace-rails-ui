@@ -28,6 +28,7 @@ Get started with [Shoelace](https://shoelace.style/) today, the Rails way!
 ## Docs
 
 [All components](#)
+
 [Example application that actually uses this](https://github.com/Schwad/shoelace-rails-ui-example)
 
 ## Workload for MVP _(contribute today!)_
