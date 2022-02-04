@@ -1,3 +1,7 @@
+# In active development 👷‍♂️ 🏗️ 🚧
+
+At time of writing, on a new Rails 7 app, this gem does give you Shoelace with the sl-light theme. It also allows you to author components with the `<%= sl_drawer %>` ERB-flavored format. There's active work (see below) to get this gem to a stable and reliable stage, so feel free to contribute!
+
 # Shoelace::Rails::Ui
 Get started with [Shoelace](https://shoelace.style/) today, the Rails way!
 
