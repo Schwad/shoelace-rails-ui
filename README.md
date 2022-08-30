@@ -5,18 +5,74 @@ At time of writing this gem gives you working Shoelace with the sl-light theme (
 # Shoelace::Rails::Ui
 Get started with [Shoelace](https://shoelace.style/) today, the Rails way!
 
+## Quickstart
+
+## Usage
+
+1. `bundle add shoelace-rails-ui`
+1. `rails g shoelace:install`
+1. presto!
+
+```erb
+# ERB-flavored shoelace.
+<%= sl_alert variant:"warning", open: true, closable: true do %>
+  Hello from shoelace!!!
+<% end %>
+
+# Is the equivalent of
+  <sl-alert variant="warning" open closable>
+    Hello from shoelace!!!
+  </sl-alert>
+
+<%= sl_divider %>
+
+# Nested blocks
+<%= sl_details summary:"Togglable" do %>
+  <%= sl_alert variant:"primary", open: true do %>
+    This is doubly-nested shoelace
+  <% end %>
+<% end %>
+
+#=>
+#  <sl-details summary="Togglable">
+#    <sl-alert variant="primary" open>
+#      This is doubly-nested shoelace
+#    </sl-alert>
+#  </sl-details>
+
+<%= sl_divider %>
+
+# You can throw in raw shoelace as well to gradually migrate existing apps.
+ <sl-dropdown>
+  <sl-button slot="trigger" caret>But you aren't forced</sl-button>
+  <sl-menu>
+    <sl-menu-item>To use</sl-menu-item>
+    <sl-menu-item>ERB</sl-menu-item>
+    <sl-divider></sl-divider>
+    <sl-menu-item checked>It's totally</sl-menu-item>
+    <sl-menu-item disabled>optional :)</sl-menu-item>
+  </sl-menu>
+</sl-dropdown>
+
+<%= sl_divider %>
+
+# Works like a dream with Hotwire 🚀
+<%= turbo_frame_tag :slow, src: static_pages_lazy_path, loading: :lazy do %>
+  <%= sl_tag variant:"warning" do %>
+    Loading lazily with hotwire!
+  <% end %>
+  <%= sl_progress_bar indeterminate: true %>
+<% end %>
+
+<%= sl_divider %>
+```
+
 ## What this gem gives you
 
 * Out-of-the-box shoelace
 * `sl_my_component(my_attribute:"")`-style ERB syntax for composing HTML with these components
 * `sl_form` helpers to write forms the Rails way, supercharged with Shoelace      
   * authored originally by @yuki24 in [shoelace-rails](https://github.com/yuki24/shoelace-rails)
-
-## Usage
-
-1. Add to gemfile and `bundle install`
-1. `rails g shoelace:install`
-1. presto!
 
 ## Requirements
 * Rails 7.0 or greater with defaults (hotwire, importmaps, etc.)
