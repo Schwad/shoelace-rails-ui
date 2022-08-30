@@ -13,7 +13,7 @@ Get started with [Shoelace](https://shoelace.style/) today, the Rails way!
 
 ```erb
 # ERB-flavored shoelace.
-<%= sl_alert variant:"warning", open: true, closable: true do %>
+<%= sl_alert variant: "warning", open: true, closable: true do %>
   Hello from shoelace!!!
 <% end %>
 
@@ -25,8 +25,8 @@ Get started with [Shoelace](https://shoelace.style/) today, the Rails way!
 <%= sl_divider %>
 
 # Nested blocks
-<%= sl_details summary:"Togglable" do %>
-  <%= sl_alert variant:"primary", open: true do %>
+<%= sl_details summary: "Togglable" do %>
+  <%= sl_alert variant: "primary", open: true do %>
     This is doubly-nested shoelace
   <% end %>
 <% end %>
@@ -56,7 +56,7 @@ Get started with [Shoelace](https://shoelace.style/) today, the Rails way!
 
 # Works like a dream with Hotwire 🚀
 <%= turbo_frame_tag :slow, src: static_pages_lazy_path, loading: :lazy do %>
-  <%= sl_tag variant:"warning" do %>
+  <%= sl_tag variant: "warning" do %>
     Loading lazily with hotwire!
   <% end %>
   <%= sl_progress_bar indeterminate: true %>
