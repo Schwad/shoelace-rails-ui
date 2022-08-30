@@ -7,8 +7,6 @@ Get started with [Shoelace](https://shoelace.style/) today, the Rails way!
 
 ## Quickstart
 
-## Usage
-
 1. `bundle add shoelace-rails-ui`
 1. `rails g shoelace:install`
 1. presto!
