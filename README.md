@@ -5,7 +5,7 @@ At time of writing this gem gives you working Shoelace with the sl-light theme (
 # Shoelace::Rails::Ui
 Get started with [Shoelace](https://shoelace.style/) today, the Rails way!
 
-## Quickstart
+# Quickstart
 
 1. `bundle add shoelace-rails-ui`
 1. `rails g shoelace:install`
