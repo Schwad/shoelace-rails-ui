@@ -1,5 +1,12 @@
+# frozen_string_literal: true
+
+# Auto-generated helper for <sl-format-date> (Shoelace 2.20.1)
+# Do not edit manually. Regenerate with: ruby regenerate_v2.rb
+
 module ShoelaceRailsUI
+  BOOLEANS_FORMAT_DATE = Set.new([]).freeze
+
   def sl_format_date(**args, &block)
-    content_tag("sl-format-date #{args[:date] ? "date=#{args[:date]}" : ""} #{args[:lang] ? "lang=#{args[:lang]}" : ""} #{args[:weekday] ? "weekday=#{args[:weekday]}" : ""} #{args[:era] ? "era=#{args[:era]}" : ""} #{args[:year] ? "year=#{args[:year]}" : ""} #{args[:month] ? "month=#{args[:month]}" : ""} #{args[:day] ? "day=#{args[:day]}" : ""} #{args[:hour] ? "hour=#{args[:hour]}" : ""} #{args[:minute] ? "minute=#{args[:minute]}" : ""} #{args[:second] ? "second=#{args[:second]}" : ""} #{args[:timeZoneName] ? "timeZoneName=#{args[:timeZoneName]}" : ""} #{args[:timeZone] ? "timeZone=#{args[:timeZone]}" : ""} #{args[:hourFormat] ? "hourFormat=#{args[:hourFormat]}" : ""}", &block)
+    _sl_render("sl-format-date", args, BOOLEANS_FORMAT_DATE, &block)
   end
 end

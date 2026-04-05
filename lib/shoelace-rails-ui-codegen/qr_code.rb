@@ -1,5 +1,12 @@
+# frozen_string_literal: true
+
+# Auto-generated helper for <sl-qr-code> (Shoelace 2.20.1)
+# Do not edit manually. Regenerate with: ruby regenerate_v2.rb
+
 module ShoelaceRailsUI
+  BOOLEANS_QR_CODE = Set.new([]).freeze
+
   def sl_qr_code(**args, &block)
-    content_tag("sl-qr-code #{args[:canvas] ? "canvas=#{args[:canvas]}" : ""} #{args[:value] ? "value=#{args[:value]}" : ""} #{args[:label] ? "label=#{args[:label]}" : ""} #{args[:size] ? "size=#{args[:size]}" : ""} #{args[:fill] ? "fill=#{args[:fill]}" : ""} #{args[:background] ? "background=#{args[:background]}" : ""} #{args[:radius] ? "radius=#{args[:radius]}" : ""} #{args[:errorCorrection] ? "errorCorrection=#{args[:errorCorrection]}" : ""}", &block)
+    _sl_render("sl-qr-code", args, BOOLEANS_QR_CODE, &block)
   end
 end

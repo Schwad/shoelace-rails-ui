@@ -1,22 +1,8 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
-
 :root,
 :host,
 .sl-theme-light {
+  color-scheme: light;
+
   --sl-color-gray-50: hsl(0 0% 97.5%);
   --sl-color-gray-100: hsl(240 4.8% 95.9%);
   --sl-color-gray-200: hsl(240 5.9% 90%);
@@ -360,10 +346,12 @@
   --sl-line-height-loose: 2.2;
   --sl-line-height-looser: 2.6;
 
-  --sl-focus-ring-alpha: 40%;
+  --sl-focus-ring-color: var(--sl-color-primary-600);
+  --sl-focus-ring-style: solid;
   --sl-focus-ring-width: 3px;
-  --sl-focus-ring: 0 0 0 var(--sl-focus-ring-width)
-    hsl(198.6 88.7% 48.4% / var(--sl-focus-ring-alpha));
+  --sl-focus-ring: var(--sl-focus-ring-style) var(--sl-focus-ring-width)
+    var(--sl-focus-ring-color);
+  --sl-focus-ring-offset: 1px;
 
   --sl-button-font-size-small: var(--sl-font-size-x-small);
   --sl-button-font-size-medium: var(--sl-font-size-small);
@@ -382,6 +370,9 @@
   --sl-input-border-color-focus: var(--sl-color-primary-500);
   --sl-input-border-color-disabled: var(--sl-color-neutral-300);
   --sl-input-border-width: 1px;
+  --sl-input-required-content: "*";
+  --sl-input-required-content-offset: -2px;
+  --sl-input-required-content-color: var(--sl-input-label-color);
 
   --sl-input-border-radius-small: var(--sl-border-radius-medium);
   --sl-input-border-radius-medium: var(--sl-border-radius-medium);
@@ -407,6 +398,9 @@
   --sl-input-spacing-medium: var(--sl-spacing-medium);
   --sl-input-spacing-large: var(--sl-spacing-large);
 
+  --sl-input-focus-ring-color: hsl(198.6 88.7% 48.4% / 40%);
+  --sl-input-focus-ring-offset: 0;
+
   --sl-input-filled-background-color: var(--sl-color-neutral-100);
   --sl-input-filled-background-color-hover: var(--sl-color-neutral-100);
   --sl-input-filled-background-color-focus: var(--sl-color-neutral-100);
@@ -419,16 +413,16 @@
   --sl-input-label-font-size-small: var(--sl-font-size-small);
   --sl-input-label-font-size-medium: var(--sl-font-size-medium);
   --sl-input-label-font-size-large: var(--sl-font-size-large);
-
   --sl-input-label-color: inherit;
 
   --sl-input-help-text-font-size-small: var(--sl-font-size-x-small);
   --sl-input-help-text-font-size-medium: var(--sl-font-size-small);
   --sl-input-help-text-font-size-large: var(--sl-font-size-medium);
-
   --sl-input-help-text-color: var(--sl-color-neutral-500);
 
-  --sl-toggle-size: 1rem;
+  --sl-toggle-size-small: 0.875rem;
+  --sl-toggle-size-medium: 1.125rem;
+  --sl-toggle-size-large: 1.375rem;
 
   --sl-overlay-background-color: hsl(240 3.8% 46.1% / 33%);
 
@@ -444,12 +438,47 @@
   --sl-tooltip-font-size: var(--sl-font-size-small);
   --sl-tooltip-line-height: var(--sl-line-height-dense);
   --sl-tooltip-padding: var(--sl-spacing-2x-small) var(--sl-spacing-x-small);
-  --sl-tooltip-arrow-size: 5px;
-  --sl-tooltip-arrow-start-end-offset: 8px;
+  --sl-tooltip-arrow-size: 6px;
 
   --sl-z-index-drawer: 700;
   --sl-z-index-dialog: 800;
   --sl-z-index-dropdown: 900;
   --sl-z-index-toast: 950;
   --sl-z-index-tooltip: 1000;
+}
+
+@supports (scrollbar-gutter: stable) {
+  .sl-scroll-lock {
+    scrollbar-gutter: var(--sl-scroll-lock-gutter) !important;
+  }
+
+  .sl-scroll-lock body {
+    overflow: hidden !important;
+  }
+}
+
+@supports not (scrollbar-gutter: stable) {
+  .sl-scroll-lock body {
+    padding-right: var(--sl-scroll-lock-size) !important;
+    overflow: hidden !important;
+  }
+}
+
+.sl-toast-stack {
+  position: fixed;
+  top: 0;
+  inset-inline-end: 0;
+  z-index: var(--sl-z-index-toast);
+  width: 28rem;
+  max-width: 100%;
+  max-height: 100%;
+  overflow: auto;
+}
+
+.sl-toast-stack sl-alert {
+  margin: var(--sl-spacing-medium);
+}
+
+.sl-toast-stack sl-alert::part(base) {
+  box-shadow: var(--sl-shadow-large);
 }

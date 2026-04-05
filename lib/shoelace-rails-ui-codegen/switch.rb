@@ -1,5 +1,12 @@
+# frozen_string_literal: true
+
+# Auto-generated helper for <sl-switch> (Shoelace 2.20.1)
+# Do not edit manually. Regenerate with: ruby regenerate_v2.rb
+
 module ShoelaceRailsUI
+  BOOLEANS_SWITCH = Set.new([:disabled, :checked, :required]).freeze
+
   def sl_switch(**args, &block)
-    content_tag("sl-switch #{args[:input] ? "input=#{args[:input]}" : ""} #{args[:name] ? "name=#{args[:name]}" : ""} #{args[:value] ? "value=#{args[:value]}" : ""} #{args[:disabled] ? " disabled" : ""} #{args[:required] ? " required" : ""} #{args[:checked] ? " checked" : ""} #{args[:invalid] ? " invalid" : ""}", &block)
+    _sl_render("sl-switch", args, BOOLEANS_SWITCH, &block)
   end
 end

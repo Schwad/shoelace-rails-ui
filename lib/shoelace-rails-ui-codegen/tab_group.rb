@@ -1,5 +1,12 @@
+# frozen_string_literal: true
+
+# Auto-generated helper for <sl-tab-group> (Shoelace 2.20.1)
+# Do not edit manually. Regenerate with: ruby regenerate_v2.rb
+
 module ShoelaceRailsUI
+  BOOLEANS_TAB_GROUP = Set.new([:no_scroll_controls, :fixed_scroll_controls]).freeze
+
   def sl_tab_group(**args, &block)
-    content_tag("sl-tab-group #{args[:tabGroup] ? "tabGroup=#{args[:tabGroup]}" : ""} #{args[:body] ? "body=#{args[:body]}" : ""} #{args[:nav] ? "nav=#{args[:nav]}" : ""} #{args[:indicator] ? "indicator=#{args[:indicator]}" : ""} #{args[:placement] ? "placement=#{args[:placement]}" : ""} #{args[:activation] ? "activation=#{args[:activation]}" : ""} #{args[:lang] ? "lang=#{args[:lang]}" : ""} #{args[:noScrollControls] ? " noScrollControls" : ""}", &block)
+    _sl_render("sl-tab-group", args, BOOLEANS_TAB_GROUP, &block)
   end
 end
