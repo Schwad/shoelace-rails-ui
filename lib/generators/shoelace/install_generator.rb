@@ -11,7 +11,7 @@ module Shoelace
 
       desc "Brings in JS"
       def bring_in_js
-        append_to_file "config/importmap.rb", "\npin \"shoelace\", to: \"https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.64/dist/shoelace.js\""
+        append_to_file "config/importmap.rb", "\npin \"shoelace\", to: \"https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/dist/shoelace.js\""
         append_to_file "app/javascript/application.js", "\nimport \"shoelace\""
       end
     end

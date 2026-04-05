@@ -1,5 +1,12 @@
+# frozen_string_literal: true
+
+# Auto-generated helper for <sl-radio> (Shoelace 2.20.1)
+# Do not edit manually. Regenerate with: ruby regenerate_v2.rb
+
 module ShoelaceRailsUI
+  BOOLEANS_RADIO = Set.new([:disabled]).freeze
+
   def sl_radio(**args, &block)
-    content_tag("sl-radio #{args[:input] ? "input=#{args[:input]}" : ""} #{args[:name] ? "name=#{args[:name]}" : ""} #{args[:value] ? "value=#{args[:value]}" : ""} #{args[:disabled] ? " disabled" : ""} #{args[:checked] ? " checked" : ""} #{args[:invalid] ? " invalid" : ""}", &block)
+    _sl_render("sl-radio", args, BOOLEANS_RADIO, &block)
   end
 end

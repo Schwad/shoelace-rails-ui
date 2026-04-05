@@ -1,5 +1,12 @@
+# frozen_string_literal: true
+
+# Auto-generated helper for <sl-icon-button> (Shoelace 2.20.1)
+# Do not edit manually. Regenerate with: ruby regenerate_v2.rb
+
 module ShoelaceRailsUI
+  BOOLEANS_ICON_BUTTON = Set.new([:disabled]).freeze
+
   def sl_icon_button(**args, &block)
-    content_tag("sl-icon-button #{args[:button] ? "button=#{args[:button]}" : ""} #{args[:name] ? "name=#{args[:name]}" : ""} #{args[:library] ? "library=#{args[:library]}" : ""} #{args[:src] ? "src=#{args[:src]}" : ""} #{args[:href] ? "href=#{args[:href]}" : ""} #{args[:target] ? "target=#{args[:target]}" : ""} #{args[:download] ? "download=#{args[:download]}" : ""} #{args[:label] ? "label=#{args[:label]}" : ""} #{args[:disabled] ? " disabled" : ""}", &block)
+    _sl_render("sl-icon-button", args, BOOLEANS_ICON_BUTTON, &block)
   end
 end

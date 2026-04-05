@@ -5,11 +5,14 @@ class Shoelace::Rails::UiTest < ActiveSupport::TestCase
     assert Shoelace::Rails::Ui::VERSION
   end
 
-  test 'generator spits out expected text' do
+  test "version is 0.2.0" do
+    assert_equal "0.2.0", Shoelace::Rails::Ui::VERSION
+  end
+
+  test 'sl_alert renders clean HTML' do
     result = ApplicationController.helpers.sl_alert(open: true, variant: "warning") do
       'hai'
     end
-    # slightly funky
-    assert_equal result, '<sl-alert variant=warning   open >hai</sl-alert variant=warning   open >'
+    assert_equal '<sl-alert open="open" variant="warning">hai</sl-alert>', result
   end
 end

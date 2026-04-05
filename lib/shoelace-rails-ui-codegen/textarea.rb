@@ -1,5 +1,12 @@
+# frozen_string_literal: true
+
+# Auto-generated helper for <sl-textarea> (Shoelace 2.20.1)
+# Do not edit manually. Regenerate with: ruby regenerate_v2.rb
+
 module ShoelaceRailsUI
+  BOOLEANS_TEXTAREA = Set.new([:filled, :disabled, :readonly, :required, :autofocus, :spellcheck]).freeze
+
   def sl_textarea(**args, &block)
-    content_tag("sl-textarea #{args[:input] ? "input=#{args[:input]}" : ""} #{args[:size] ? "size=#{args[:size]}" : ""} #{args[:name] ? "name=#{args[:name]}" : ""} #{args[:value] ? "value=#{args[:value]}" : ""} #{args[:label] ? "label=#{args[:label]}" : ""} #{args[:helpText] ? "helpText=#{args[:helpText]}" : ""} #{args[:placeholder] ? "placeholder=#{args[:placeholder]}" : ""} #{args[:rows] ? "rows=#{args[:rows]}" : ""} #{args[:resize] ? "resize=#{args[:resize]}" : ""} #{args[:minlength] ? "minlength=#{args[:minlength]}" : ""} #{args[:maxlength] ? "maxlength=#{args[:maxlength]}" : ""} #{args[:pattern] ? "pattern=#{args[:pattern]}" : ""} #{args[:autocapitalize] ? "autocapitalize=#{args[:autocapitalize]}" : ""} #{args[:autocorrect] ? "autocorrect=#{args[:autocorrect]}" : ""} #{args[:autocomplete] ? "autocomplete=#{args[:autocomplete]}" : ""} #{args[:inputmode] ? "inputmode=#{args[:inputmode]}" : ""} #{args[:top] ? "top=#{args[:top]}" : ""} #{args[:left] ? "left=#{args[:left]}" : ""} #{args[:selectionEnd] ? "selectionEnd=#{args[:selectionEnd]}" : ""} #{args[:start] ? "start=#{args[:start]}" : ""} #{args[:filled] ? " filled" : ""} #{args[:disabled] ? " disabled" : ""} #{args[:readonly] ? " readonly" : ""} #{args[:required] ? " required" : ""} #{args[:invalid] ? " invalid" : ""} #{args[:autofocus] ? " autofocus" : ""} #{args[:spellcheck] ? " spellcheck" : ""}", &block)
+    _sl_render("sl-textarea", args, BOOLEANS_TEXTAREA, &block)
   end
 end

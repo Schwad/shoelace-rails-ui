@@ -1,5 +1,12 @@
+# frozen_string_literal: true
+
+# Auto-generated helper for <sl-relative-time> (Shoelace 2.20.1)
+# Do not edit manually. Regenerate with: ruby regenerate_v2.rb
+
 module ShoelaceRailsUI
+  BOOLEANS_RELATIVE_TIME = Set.new([:sync]).freeze
+
   def sl_relative_time(**args, &block)
-    content_tag("sl-relative-time #{args[:date] ? "date=#{args[:date]}" : ""} #{args[:lang] ? "lang=#{args[:lang]}" : ""} #{args[:format] ? "format=#{args[:format]}" : ""} #{args[:numeric] ? "numeric=#{args[:numeric]}" : ""} #{args[:sync] ? " sync" : ""}", &block)
+    _sl_render("sl-relative-time", args, BOOLEANS_RELATIVE_TIME, &block)
   end
 end

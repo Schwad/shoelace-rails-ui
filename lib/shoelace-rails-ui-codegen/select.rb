@@ -1,5 +1,12 @@
+# frozen_string_literal: true
+
+# Auto-generated helper for <sl-select> (Shoelace 2.20.1)
+# Do not edit manually. Regenerate with: ruby regenerate_v2.rb
+
 module ShoelaceRailsUI
+  BOOLEANS_SELECT = Set.new([:multiple, :disabled, :clearable, :open, :hoist, :filled, :pill, :required]).freeze
+
   def sl_select(**args, &block)
-    content_tag("sl-select #{args[:dropdown] ? "dropdown=#{args[:dropdown]}" : ""} #{args[:control] ? "control=#{args[:control]}" : ""} #{args[:input] ? "input=#{args[:input]}" : ""} #{args[:menu] ? "menu=#{args[:menu]}" : ""} #{args[:maxTagsVisible] ? "maxTagsVisible=#{args[:maxTagsVisible]}" : ""} #{args[:name] ? "name=#{args[:name]}" : ""} #{args[:placeholder] ? "placeholder=#{args[:placeholder]}" : ""} #{args[:size] ? "size=#{args[:size]}" : ""} #{args[:value] ? "value=#{args[:value]}" : ""} #{args[:label] ? "label=#{args[:label]}" : ""} #{args[:helpText] ? "helpText=#{args[:helpText]}" : ""} #{args[:multiple] ? " multiple" : ""} #{args[:disabled] ? " disabled" : ""} #{args[:hoist] ? " hoist" : ""} #{args[:filled] ? " filled" : ""} #{args[:pill] ? " pill" : ""} #{args[:required] ? " required" : ""} #{args[:clearable] ? " clearable" : ""} #{args[:invalid] ? " invalid" : ""}", &block)
+    _sl_render("sl-select", args, BOOLEANS_SELECT, &block)
   end
 end
